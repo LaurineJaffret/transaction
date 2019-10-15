@@ -63,6 +63,23 @@ public class BankingTest {
 		assertEquals("Balance incorrecte !", before0 - amount, myDAO.balanceForCustomer(fromCustomer), 0.001f);
 		assertEquals("Balance incorrecte !", before1 + amount, myDAO.balanceForCustomer(toCustomer), 0.001f);				
 	}
+        @Test (expected=Exception.class)
+        public void negatif() throws Exception {
+            float amount = 200.0f;
+            int fromCustomer = 0;
+            int toCustomer = 1;
+            myDAO.bankTransferTransaction(fromCustomer, toCustomer, amount);
+         
+        }
+        
+        @Test (expected=Exception.class)
+        public void inexistant() throws Exception {
+            float amount = 10.0f;
+            int fromCustomer = 200;
+            int toCustomer = 1;
+            myDAO.bankTransferTransaction(fromCustomer, toCustomer, amount);
+         
+        }
 	
 
 	public static DataSource getDataSource() throws SQLException {
